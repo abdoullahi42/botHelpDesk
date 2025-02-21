@@ -1,4 +1,4 @@
-import ChatUI from "./components/chatUI";
+import ChatUI from "./components/WebsitePage";
 
 function App() {
   return (
