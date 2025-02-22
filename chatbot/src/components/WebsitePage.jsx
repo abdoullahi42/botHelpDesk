@@ -205,7 +205,7 @@ const WebsitePage = () => {
             
 
             
-            <a className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 flex items-center"href="https://wa.me/+237698630382"
+            <a className="bg-white text-blue-900 px-8  w-fit py-3 rounded-lg font-semibold hover:bg-blue-50 flex items-center"href="https://wa.me/+237698630382"
     target="_blank"
     rel="noopener noreferrer" >
               {t.hero.cta}
