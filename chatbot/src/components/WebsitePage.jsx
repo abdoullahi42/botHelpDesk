@@ -1,4 +1,5 @@
 import  { useState } from 'react';
+import Hero from "../assets/hero.webp"
 import {
   FiSend,
   FiPhone,
@@ -197,7 +198,7 @@ const WebsitePage = () => {
       </div>
     </nav>
 
-        <div className="container mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 lg:gap-28 lg:py-10 items-center">
           <div>
             <h1 className="text-5xl font-bold mb-6">{t.hero.title}</h1>
             <p className="text-xl mb-8">{t.hero.subtitle}</p>
@@ -212,9 +213,9 @@ const WebsitePage = () => {
               <FiChevronRight className="ml-2" />
             </a>
           </div>
-          <div className="hidden md:block">
+          <div className=" w-[70%]  hidden md:block">
             <img
-              src="/api/placeholder/600/400"
+              src={Hero}
               alt="Digital Dashboard"
               className="rounded-lg shadow-2xl"
             />
