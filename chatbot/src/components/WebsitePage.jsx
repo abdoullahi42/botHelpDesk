@@ -201,10 +201,16 @@ const WebsitePage = () => {
           <div>
             <h1 className="text-5xl font-bold mb-6">{t.hero.title}</h1>
             <p className="text-xl mb-8">{t.hero.subtitle}</p>
-            <button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 flex items-center">
+
+            
+
+            
+            <a className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 flex items-center"href="https://wa.me/+237698630382"
+    target="_blank"
+    rel="noopener noreferrer" >
               {t.hero.cta}
               <FiChevronRight className="ml-2" />
-            </button>
+            </a>
           </div>
           <div className="hidden md:block">
             <img
