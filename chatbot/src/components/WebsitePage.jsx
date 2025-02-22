@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import {
   FiSend,
   FiPhone,
@@ -7,22 +7,20 @@ import {
   FiLinkedin,
   FiGithub,
   FiChevronRight,
-  FiBarChart2,
   FiPackage,
   FiFileText,
   FiSettings,
   FiUsers,
   FiGlobe,
+  FiMenu, 
+  FiX, 
 } from 'react-icons/fi';
+
+
 
 const WebsitePage = () => {
   const [language, setLanguage] = useState('en');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
+  const [isOpen, setIsOpen] = useState(false);
 
   const content = {
     en: {
@@ -156,7 +154,7 @@ const WebsitePage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-16 lg:top-4 right-4 z-50">
         <button
           onClick={() => setLanguage((lang) => (lang === 'en' ? 'fr' : 'en'))}
           className="flex items-center bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg hover:bg-gray-50"
@@ -168,20 +166,36 @@ const WebsitePage = () => {
 
       {/* Hero Section */}
       <header className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-bold">GleamMax</div>
-          <div className="space-x-6">
-            <a href="#about" className="hover:text-blue-200">
-              {t.nav.about}
-            </a>
-            <a href="#services" className="hover:text-blue-200">
-              {t.nav.services}
-            </a>
-            <a href="#contact" className="hover:text-blue-200">
-              {t.nav.contact}
-            </a>
-          </div>
-        </nav>
+      <nav className="container mx-auto px-6 py-6 flex items-center justify-between lg:w-11/12 pr-32">
+      <div className="text-2xl font-bold">GleamMax</div>
+
+      {/* Hamburger menu for mobile */}
+      <div className="lg:hidden">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-2xl focus:outline-none"
+        >
+          {isOpen ? <FiX /> : <FiMenu />}
+        </button>
+      </div>
+
+      {/* Navigation links */}
+      <div
+        className={`absolute top-16 left-0 w-full bg-white text-blue-500 p-6 space-y-4 md:bg-transparent md:text-white shadow-md md:static md:w-auto md:flex md:space-x-6 md:space-y-0  md:p-0 md:items-center md:justify-center ${
+          isOpen ? "block" : "hidden"
+        }`}
+      >
+        <a href="#about" className="block hover:text-blue-200">
+          {t.nav.about}
+        </a>
+        <a href="#services" className="block hover:text-blue-200">
+          {t.nav.services}
+        </a>
+        <a href="#contact" className="block hover:text-blue-200">
+          {t.nav.contact}
+        </a>
+      </div>
+    </nav>
 
         <div className="container mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -264,42 +278,64 @@ const WebsitePage = () => {
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-16">{t.contact.title}</h2>
           <div className="max-w-2xl mx-auto">
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
-              <div>
-                <label className="block text-gray-700 mb-2">{t.contact.name}</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">{t.contact.email}</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">{t.contact.phone}</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">{t.contact.message}</label>
-                <textarea
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 flex items-center justify-center"
-              >
-                {t.contact.send}
-                <FiSend className="ml-2" size={20} />
-              </button>
-            </form>
+          <form
+  onSubmit={(e) => {
+    e.preventDefault();
+    const name = e.target.elements.name.value;
+    const email = e.target.elements.email.value;
+    const phone = e.target.elements.phone.value;
+    const message = e.target.elements.message.value;
+
+    const mailtoLink = `mailto:abdoullahisalihou2@gmail.com?subject=Contact%20Form%20Submission&body=Name:%20${encodeURIComponent(
+      name
+    )}%0AEmail:%20${encodeURIComponent(email)}%0APhone:%20${encodeURIComponent(
+      phone
+    )}%0AMessage:%20${encodeURIComponent(message)}`;
+
+    window.location.href = mailtoLink;
+  }}
+  className="space-y-6"
+>
+  <div>
+    <label className="block text-gray-700 mb-2">{t.contact.name}</label>
+    <input
+      type="text"
+      name="name"
+      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+  <div>
+    <label className="block text-gray-700 mb-2">{t.contact.email}</label>
+    <input
+      type="email"
+      name="email"
+      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+  <div>
+    <label className="block text-gray-700 mb-2">{t.contact.phone}</label>
+    <input
+      type="tel"
+      name="phone"
+      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+  <div>
+    <label className="block text-gray-700 mb-2">{t.contact.message}</label>
+    <textarea
+      name="message"
+      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
+    ></textarea>
+  </div>
+  <button
+    type="submit"
+    className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 flex items-center justify-center"
+  >
+    {t.contact.send}
+    <FiSend className="ml-2" size={20} />
+  </button>
+</form>
+
           </div>
         </div>
       </section>
@@ -321,7 +357,7 @@ const WebsitePage = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <FiPhone size={20} className="mr-2" />
-                  <span>+237 6XX XXX XXX</span>
+                  <span>+237 6 98 63 03 82</span>
                 </div>
                 <div className="flex items-center">
                   <FiMail size={20} className="mr-2" />
